@@ -1,0 +1,8 @@
+/* Styles for Trivia Game */
+body {
+    background-image: url(../images/dundermifflin.JPG);
+    width: auto;
+    height: auto;
+    background-size: cover;
+}
+
