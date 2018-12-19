@@ -6,3 +6,7 @@ body {
     background-size: cover;
 }
 
+video {
+    max-width: 33%;
+    max-height: 30%;
+}
