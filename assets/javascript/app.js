@@ -37,9 +37,22 @@ for (let i = 0; i < triviaQuestions.length; i++) {
 }
 
 // Variable for the timer
-var timerDisplay = 00;
+var timerDisplay = 120;
 
+function timerStart() {
+    $("#timer").text("Time Remaining: " + timerDisplay);
+    setInterval(timerDisplay, 1000)
+    timerDisplay--;
+    if (timerDisplay === 0) {
+        timerStop();
+        $("#timer").empty();
+    }
+}
 
+function timerStop() {
+    clearInterval();
+    resultDisplay();
+}
 // By clicking the start button it will "start" the game.
 $("#start").click(function() {
     // Hide the start page.
@@ -47,26 +60,35 @@ $("#start").click(function() {
     // Make the trivia div visible.
     $("#trivia-div").show();
 
-    // Set the timer
-    timerDisplay.setTimeout(function () {
-        $("#timer").text(timerDisplay);
-    }, 2000);
+    // Show the time remaining
+    timerStart();
+    if (timerDisplay === 0) {
+        timerStop();
+        $("#trivia-div").hide();
+        $("#result-div").show();
+        resultDisplay();
+    } else if ($("#finish").click() === true) {
+        $("#trivia-div").hide();
+        $("#result-div").show();
+        resultDisplay();
+    }
 });
+// Varibles for the results page
+    var userInput;
+    var userCorrect;
+    var displayCorrect = $("#right");
+    var displayWrong = $("#wrong");
+    var displayNoInput = $("#undefined");
 
-// function resultDisplay() {
-//     var userInput;
-//     var userCorrect;
-//     var displayCorrect = 0;
-//     var displayWrong = 0;
-//     var displayNoInput = 0;
-
-//     for (let i = 0; i < triviaQuestions.length; i++)
-//         userCorrect = triviaQuestions[i].length
-//     if (userInput === answer) {
-//         displayCorrect++;
-//     } else if (userInput !== answer) {
-//         displayWrong++;
-//     } else {
-//         displayNoInput++;
-//     }
-// }
+function resultDisplay() {
+    for (let i = 0; i < triviaQuestions.length; i++)
+        userInput = $().();
+        userCorrect = triviaQuestions[i].length
+    if (userInput === answer) {
+        displayCorrect++;
+    } else if (userInput !== answer) {
+        displayWrong++;
+    } else {
+        displayNoInput++;
+    }
+}
