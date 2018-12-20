@@ -26,39 +26,33 @@ var triviaQuestions = [{
     correct: "Pretzel Day"
 }];
 
+var timerDisplay;
 // Declaring the variables for userinputs
-// Declare the global functions to be used in the game.
+// On click the start button will "start" the game.
 function triviaDisplay() {
-    $("#start").on("click", function() {
-        $("#trivia-display").show(triviaQuestions);
-        $("#timer").setTimeout();
+    $("#start").click(function () {
+        // Need to hide the start page.
+        $(".start-div").hide();
+        // Make the trivia div visible.
+        $("#trivia-display").show();
+        // Do not show the answers
         $("#trivia-display").hide(triviaQuestions.correct);
-        
+        // Set the timer
+        timerDisplay.setTimeout(function () {
+            $("#timer").text(timerDisplay);
+        }, 2000);
     });
 }
 
-function rightAnswer() {
-
-}
-
-function wrongAnswer() {
-
-}
-
-setTimeout(function(){
-    resultDisplay()
-}, 2000)
-
-
 function resultDisplay() {
     var userInput;
-    var correct;
+    var userCorrect;
     var displayCorrect = 0;
     var displayWrong = 0;
     var displayNoInput = 0;
 
     for (let i = 0; i < triviaQuestions.length; i++)
-        correct = triviaQuestions[i].length
+        userCorrect = triviaQuestions[i].length
     if (userInput === correct) {
         displayCorrect++;
     } else if (userInput !== correct) {

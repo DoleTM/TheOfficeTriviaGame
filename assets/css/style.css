@@ -10,3 +10,7 @@ video {
     max-width: 33%;
     max-height: 30%;
 }
+
+#trivia-display {
+    display: none;
+}

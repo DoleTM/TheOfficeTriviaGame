@@ -13,19 +13,24 @@
 </head>
 
 <body>
-    <video controls autoplay>
-        <source src="assets/images/office-intro.mp4" type="video/mp4">
-    </video>
-    <div class="container">
-        <button type="button" class="btn btn-secondary" id="start">
-            Start
-        </button>
+    <div class="start-div">
+        <video controls autoplay>
+            <source src="assets/images/office-intro.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <button type="button" class="btn btn-secondary" id="start">
+                Start
+            </button>
+        </div>
     </div>
     <div id="trivia-display">
-        <div id="timer">Time Remaining: 2 minutes</div>
+        <div id="timer"></div>
         <audio controls autoplay>
             <source src="assets/images/dundermifflinaudio.mp3" type="audio/mp3">
         </audio>
+        <div class="question-display">
+            Questions go here
+        </div>
         <div class="row">
             <label class="col-3">
                 <input type="radio" name="radio">
@@ -49,7 +54,7 @@
         </div> 
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-    <script type="text/javascript" src="assets/javascript/game.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 
 </html>
