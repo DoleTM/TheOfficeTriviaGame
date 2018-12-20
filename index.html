@@ -23,35 +23,41 @@
             </button>
         </div>
     </div>
-    <div id="trivia-display">
+    <div id="trivia-div">
         <div id="timer"></div>
         <audio controls autoplay>
             <source src="assets/images/dundermifflinaudio.mp3" type="audio/mp3">
         </audio>
-        <div class="question-display">
+        <div id="questions-div">
             Questions go here
         </div>
         <div class="row">
-            <label class="col-3">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="col-3">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="col-3">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-                <label class="col-3">
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
+            <button id="button1">
+            </button>
+            <button id="button2">
+            </button>
+            <button id="button3">
+            </button>
+            <button id="button4">
+            </button>
             <button type="button" class="btn btn-success" id="finish">
             Finish
             </button>
         </div> 
+    </div>
+    <div id="result-div">
+        <div id="right">
+        Correct: 
+        </div>
+        <div id="wrong">
+        Wrong: 
+        </div>
+        <div id="undefined">
+        Not Answered: 
+        </div>
+        <button type="button" class="btn btn-danger" id="restart">
+        Play Again?
+        </button>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
