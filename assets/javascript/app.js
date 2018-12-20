@@ -27,22 +27,19 @@ var triviaQuestions = [{
 
 for (let i = 0; i < triviaQuestions.length; i++) {
     var questionDiv = $("#questions-div");
-    questionDiv.append(triviaQuestions[i].question);
-
-    var selbutton1 = triviaQuestions[i].selection[0];
-    var selbutton2 = triviaQuestions[i].selection[1];
-    var selbutton3 = triviaQuestions[i].selection[2];
-    var selbutton4 = triviaQuestions[i].selection[3];
-    
-    $("#button1").append(selbutton1).attr("form");
-    $("#button2").append(selbutton2).attr("form");
-    $("#button3").append(selbutton3).attr("form");
-    $("#button4").append(selbutton4).attr("form");
+    // This adds the questions to display on the html
+    questionDiv.append("<div>" + triviaQuestions[i].question + "</div>");
+// This adds the selection to each question as a radio button to the html
+    $("#questions-div").append('<label class="container">' + '<input type="radio" name="radio">' + '<span class="checkmark">' + '</span>' + triviaQuestions[i].selection[0] + '</label>');
+    $("#questions-div").append('<label class="container">' + '<input type="radio" name="radio">' + '<span class="checkmark">' + '</span>' + triviaQuestions[i].selection[1] + '</label>');
+    $("#questions-div").append('<label class="container">' + '<input type="radio" name="radio">' + '<span class="checkmark">' + '</span>' + triviaQuestions[i].selection[2] + '</label>');
+    $("#questions-div").append('<label class="container">' + '<input type="radio" name="radio">' + '<span class="checkmark">' + '</span>' + triviaQuestions[i].selection[3] + '</label>');
 }
-// add buttons and questions to the trivia div.
 
 // Variable for the timer
 var timerDisplay = 00;
+
+
 // By clicking the start button it will "start" the game.
 $("#start").click(function() {
     // Hide the start page.
