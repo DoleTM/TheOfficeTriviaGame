@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The Office Trivia Game</title>
+    <title>The Office Trivia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -13,42 +13,57 @@
 </head>
 
 <body>
-    <div class="start-div">
-        <video controls autoplay class="row-6">
-            <source src="assets/images/office-intro.mp4" type="video/mp4">
-        </video>
-        <div class="container col-6">
-            <button type="button" class="btn btn-secondary" id="start">
-                Start
-            </button>
+    <div id="intro-container">
+        <h1>The Office Trivia</h1>
+        <div id="btn-container">
+            <div id="play" class="btn">
+                <p>Play</p>
+            </div>
         </div>
     </div>
-    <div id="trivia-div">
-        <div id="timer"></div>
-        <audio controls autoplay>
-            <source src="assets/images/dundermifflinaudio.mp3" type="audio/mp3">
-        </audio>
-        <div id="questions-div">
+    <div id="game-container">
+        <div id="time-container">
+            <div id="time-backdrop">
+                <p id="time">30</p>
+            </div>
         </div>
-        <div class="row">
-            <button type="button" class="btn btn-success" id="finish">
-            Finish
-            </button>
-        </div> 
+        <div id="questions" class="tab">
+            <p id="question"></p>
+        </div>
+        <div id="choices"></div>
     </div>
-    <div id="result-div">
-        <div id="right">
-        Correct: 
+    <div id="pause-screen">
+        <div id="pause-heading">
+            <p>Paused</p>
         </div>
-        <div id="wrong">
-        Wrong: 
-        </div>
-        <div id="undefined">
-        Not Answered: 
+        
+        <div id="resume" class="btn">
+            <p>Resume</p>
         </div>
     </div>
+    <div id="end-screen">
+        <div id="end-heading">
+            <p>Results:</p>
+        </div>
+        <div id="end-body">
+            <p>Correct Answers: <span id="correct-text">0</span></p>
+            <p>Incorrect Answers: <span id="incorrect-text">0</span></p>
+            <p>Unanswered: <span id="unanswered">0</span></p>
+        </div>
+        
+        <div id="end-bottom">
+            <div id="play-again" class="btn">
+                <p>Play Again?</p>
+            </div>
+        </div>
+    </div>
+
+    <audio controls autoplay>
+        <source src="assets/images/dundermifflinaudio.mp3" type="audio/mp3">
+    </audio>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="assets/javascript/trivia.js"></script> 
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
-
 </html>
