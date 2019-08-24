@@ -1,177 +1,223 @@
-$(document).ready(function () {
+var trivia = [{
+    question: "In S1E1 'Pilot': Who started their first day at Dunder Mifflin Scranton?",
+    answers: [
+        { a1: "Jim Halpert", value: false },
+        { a2: "Ryan Howard", value: true, pic: "ryanhoward.gif" },
+        { a3: "Michael Scott", value: false },
+        { a4: "Erin Hannon", value: false }
+    ]
+},
+{
+    question: "In S1E2 'Diversity Day': What famous comedian's stand up routine does Michael imitate?",
+    answers: [
+        { a1: "Chris Rock", value: true, pic: "diversityday.gif" },
+        { a2: "Richard Pryor", value: false },
+        { a3: "Robin Williams", value: false },
+        { a4: "George Carlin", value: false }
+    ],
+},
+{
+    question: "In S1E3 'Health Care': Which of these is NOT one of Jim and Pam's made up diseases?",
+    answers: [
+        { a1: "Killer Nanorobots", value: false },
+        { a2: "Hot Dog Fingers", value: false },
+        { a3: "Spontaneous Dental Hydroplosion", value: false },
+        { a4: "Hair Cancer", value: true, pic: "haircancer.gif" }
+    ],
+},
+{
+    question: "In S1E4 'The Alliance': How much money does Michael donate to Oscar's nephew's charity, not realizing it is a walk-a-thon and the amount is per mile?",
+    answers: [
+        { a1: "$40", value: false },
+        { a2: "$10", value: false },
+        { a3: "$25", value: true, pic: "25.gif" },
+        { a4: "$100", value: false }
+    ],
+},
+{
+    question: "In S1E5 'Basketball': What small appliance of Pam's breaks down? (It was given to her at her engagement party three years earlier) ",
+    answers: [
+        { a1: "Toaster", value: false },
+        { a2: "Microwave", value: false },
+        { a3: "Blender", value: false },
+        { a4: "Toaster Oven", value: true, pic: "toasteroven.gif" }
+    ],
+},
+{
+    question: "In S1E6 'Hot Girl' What is the Hot Girl's name?",
+    answers: [
+        { a1: "Amy", value: false },
+        { a2: "Christy", value: false },
+        { a3: "Kelly", value: false },
+        { a4: "Katy", value: true, pic: "katy.gif" }
+    ],
+},
+{
+    question: "In S2E1 'The Dundies': What Dundie award does Phyllis take home?",
+    answers: [
+        { a1: "The Busiest Beaver Dundie", value: false },
+        { a2: "The Bushiest Beaver Dundie", value: true, pic: "bushiestbeaver.gif" },
+        { a3: "Spicy Curry Dundie", value: false },
+        { a4: "Whitest Sneakers Dundie", value: false }
+    ],
+},
+{
+    question: "In S2E2 'Sexual Harassment': What is on Todd Packer's vanity license plate?",
+    answers: [
+        { a1: "LUVMKR", value: false },
+        { a2: "WLHUNG", value: true, pic: "wlhung.gif" },
+        { a3: "TODPKR", value: false },
+        { a4: "BGDADY", value: false }
+    ],
+},
+{
+    question: "In S2E3 'Office Olympics': What does Pam name 'Box of paper snowshoe racing'?",
+    answers: [
+        { a1: "Flonkerton", value: true, pic: "placeholder.gif" },
+        { a2: "Icelandic Snowshoe Racing", value: false },
+        { a3: "Bixing", value: false },
+        { a4: "Pegerhosen", value: false }
+    ],
+},
+{
+    question: "In S2E5 'Halloween': What is Jim's costume?",
+    answers: [
+        { a1: "'Dave'", value: true, pic: "threeholepunchjim.gif" },
+        { a2: "Bookface", value: false },
+        { a3: "Three Hole Punch Jim", value: false },
+        { a4: "Rational Consumer", value: false }
+    ],
+}];
 
-    var fps = 50; // 50 frames per second
-    var seconds = 30; // Current amount of seconds
+var quesNum, correct, incorrect, unanswered;
+var quesSeconds = 15,
+    resultSeconds = 5;
+var intervalId, number;
+var mode; // 1 for question screen, 2 for result screen
 
-    var myGameArea = {
-        canvas: $("canvas").get()[0],
-        mode: "intro",
-        userPresent: true,
+function stopTimer() {
+    clearInterval(intervalId);
+};
 
-        // Display questions
-        display() {
-            const subject = myGameStats.subject;
-            if (_G.myQuestions[subject].length <= myGameStats.question) {
-                this.end();
-                return;
+function runTimer() {
+    number--;
+    if (mode === 1) {
+        $("#remaining").text("Time remaining: " + number + " seconds");
+        if (number === 0) {
+            stopTimer();
+            displayResult(-2);
+        }
+    } else { // mode equals 2
+        if (number === 0) {
+            stopTimer();
+            quesNum++;
+            if (quesNum < trivia.length) {
+                nextQuestion();
+            } else {
+                displayStats();
             };
-            const question = _G.myQuestions[subject][myGameStats.question];
-            this.mode = "transition";
-            $("#transition").css("display", "block");
-            setTimeout(() => {
-                $("#transition").css("display", "none");
-                frame = 0;
-                this.mode = "playing";
-            }, 2000);
-            // Reset timer
-            seconds = 30;
-            $("#time").css("color", "white");
-            $("#time").text(seconds);
+        };
+    }
+};
 
-            // Reset text
-            $('#question').text(question.q);
-            $('#choices').html(''); // Clearing answer choices
-            let currChoices = question.choices.slice();
-            let newChoice = "<div class='tab'> <p>Replacement</p> <img src='assets/images/btn2.png' height='100%' width='100%' style='position:absolute;display:block;left:0;'> </div>"
-            let correctBtn = $(newChoice.replace("Replacement", question.a));
+function nextQuestion() {
+    $("#question").text(trivia[quesNum].question);
+    $("#a1").text(trivia[quesNum].answers[0].a1);
+    $("#a2").text(trivia[quesNum].answers[1].a2);
+    $("#a3").text(trivia[quesNum].answers[2].a3);
+    $("#a4").text(trivia[quesNum].answers[3].a4);
 
-            for (var i = 0; i < question.choices.length; i++) {
-                const randomIndex = Math.floor(Math.random() * currChoices.length);
-                $('#choices').append($(newChoice.replace("Replacement", currChoices[randomIndex])));
-                currChoices.splice(randomIndex, 1);
-            };
+    $("#start").hide();
+    $("#correct-text").hide();
+    $("#gif").hide();
+    $("#stats").hide();
 
-            const randomIndex = Math.floor(Math.random() * (question.choices.length + 1));
-            if (randomIndex == question.choices.length) {
-                $("#choices").append(correctBtn);
+    $("#remaining").show();
+    $("#question").show();
+    $(".answer").show();
+
+    mode = 1;
+    number = quesSeconds;
+    $("#remaining").text("Time remaining: " + number + " seconds");
+    intervalId = setInterval(runTimer, 1000);
+}
+
+function displayResult(result) {
+    var answer;
+    var src = "assets/images/"
+    for (i = 0; i < trivia[quesNum].answers.length; i++) {
+        if (trivia[quesNum].answers[i].value) {
+            switch (i) {
+                case 0:
+                    answer = trivia[quesNum].answers[i].a1;
+                    break;
+
+                case 1:
+                    answer = trivia[quesNum].answers[i].a2;
+                    break;
+
+                case 2:
+                    answer = trivia[quesNum].answers[i].a3;
+                    break;
+
+                case 3:
+                    answer = trivia[quesNum].answers[i].a4;
             }
-            else {
-                correctBtn.insertBefore($("#choices").children()[randomIndex]);
-            };
-
-            $("#choices .tab").on("click", function (event) {
-                $("#choices .tab").off("click"); // Turn off event listener
-                myGameArea.mode = "transition";
-                $("#choices .tab img").css("filter", "grayscale(1) brightness(0.75)");
-                if (this == correctBtn.get()[0]) {
-                    myGameStats.correct++;
-                }
-                else {
-                    $(this).find("img").css("filter", "brightness(1)");
-                    myGameStats.incorrect++;
-                };
-                correctBtn.find("img").css("filter", "hue-rotate(100deg) brightness(1)"); // Displays correct answer
-                setTimeout(function () {
-                    myGameStats.question++;
-                    myGameArea.display(subject);
-                }, 2000);
-            });
-        },
-
-        timer() {
-            let dispSeconds = seconds; // Creating variable to store current seconds
-            if (seconds < 10) {
-                if (seconds == 9) {
-                    $("#countdown").get()[0].play();
-                };
-                dispSeconds = "0" + dispSeconds;
-                $("#time").css({ "color": "red", "font-size": "44px", "opacity": 0.5 });
-                $("#time").animate({ "font-size": "32px", "opacity": 1 }, 300);
-            }
-
-            if (seconds <= 0) {
-                const tabs = $("#choices .tab");
-                tabs.off("click"); // Turn off answer choices click listener
-                tabs.find("img").css("filter", "brightness(1)");
-
-                // Find correct answer and highlight it
-                for (let i = 0; i < tabs.length; i++) {
-                    let choice = $(tabs[i]);
-                    if (choice.find("p").text() == _G.myQuestions[myGameStats.subject][myGameStats.question].a) {
-                        choice.find("img").css("filter", "hue-rotate(100deg) brightness(1)");
-                    };
-                };
-
-                $("#countdown").get()[0].currentTime = 18;
-                setTimeout(() => {
-                    myGameStats.question++;
-                    // Checking if user is still playing
-                    if (this.userPresent) {
-                        setTimeout(() => {
-                            this.display();
-                        }, 1000);
-                    }
-                    else {
-                        $("#game-container").css("display", "none");
-                        $("#pause-screen").slideDown();
-                        clearInterval(this.interval);
-                    };
-                }, 3000);
-            };
-            $("#time").text(dispSeconds);
-        },
-        // End screen
-        end() {
-            this.mode = "end";
-            $("#game-container").css("display", "none");
-            let total = _G.myQuestions[myGameStats.subject].length;
-            $("#correct-text").text(myGameStats.correct);
-            $("#incorrect-text").text(myGameStats.incorrect);
-            $("#unanswered").text(total - myGameStats.correct - myGameStats.incorrect);
-            $("#end-screen").css("display", "block");
-            myGameStats.scar = myGameStats.correct / total < 0.7 || true;
-        },
+            $("#correct-text").text("The correct answer is: " + answer);
+            $("#gif").attr("src", src + trivia[quesNum].answers[i].pic);
+        };
     };
 
-    var myGameStats = {
-        incorrect: 0,
-        correct: 0,
-        question: 0,
-        subject: 'The Office',
-        scar: false,
-        reset: function () {
-            var arr = Object.keys(this);
-            for (var i = 0; i < arr.length; i++) {
-                let prop = this[arr[i]];
-                if (typeof (prop) == "number") {
-                    this[arr[i]] = 0;
-                };
-            };
-        },
+    switch (result) {
+        case -1:
+            $("#question").text("Wrong!");
+            incorrect++;
+            break;
+        case -2:
+            $("#question").text("Unanswered!");
+            unanswered++;
+            break;
+        default:
+            correct++;
+            $("#question").text("Correct!");
+    }
+
+    if (result < 0) {
+        $("#correct-text").show();
     };
 
-    // Starting the game
-    $("#play").on("click", function () {
-        myGameStats.reset();
-        $("#intro-container").css("display", "none");
-        $("#game-container").css("display", "block");
-        myGameArea.display();
-    });
+    $(".answer").hide();
+    $("#gif").show();
 
-    // Resume the game
-    $("#resume").on("click", function () {
-        $("#pause-screen").slideUp(function () {
-            myGameArea.interval = setInterval(updateGameArea, 1000 / fps);
-            myGameArea.display();
-            $("#game-container").css("display", "block");
-        });
-    });
+    mode = 2;
+    number = resultSeconds;
+    intervalId = setInterval(runTimer, 1000);
+};
 
-    // Restart the game
-    $("#play-again").on("click", function () {
-        $("#end-screen").css("display", "none");
-        myGameStats.reset();
-        $("#game-container").css("display", "block");
-        myGameArea.display();
-    });
+var displayStats = function () {
+    $("#question").text("All done! Here's how you did:");
+    $("#correct-text").hide();
+    $("#gif").hide();
+    $("#stats").html("Correct answers: " + correct + "<br>Incorrect answers: " + incorrect + "<br>Unanswered: " + unanswered);
+    $("#stats").show();
+    $("#start").text("TRY AGAIN");
+    $("#start").show();
+}
 
-    // When the user comes back to the page
-    $(window).focus(function () {
-        myGameArea.userPresent = true;
-    });
+$("#start").on("click", function () {
+    quesNum = 0;
+    correct = 0;
+    incorrect = 0;
+    unanswered = 0;
+    nextQuestion();
+});
 
-    // When the user leaves the page
-    $(window).blur(function () {
-        myGameArea.userPresent = false;
-    });
+$(".answer").on("click", function () {
+    stopTimer();
+    var index = parseInt($(this).data("index"));
+    if (trivia[quesNum].answers[index].value) {
+        displayResult(index);
+    } else {
+        displayResult(-1);
+    };
 });

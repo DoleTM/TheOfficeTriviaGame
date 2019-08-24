@@ -13,49 +13,20 @@
 </head>
 
 <body>
-    <div id="intro-container">
+    <div class="container">
         <h1>The Office Trivia</h1>
-        <div id="btn-container">
-            <div id="play" class="btn">
-                <p>Play</p>
-            </div>
-        </div>
-    </div>
-    <div id="game-container">
-        <div id="time-container">
-            <div id="time-backdrop">
-                <p id="time">30</p>
-            </div>
-        </div>
-        <div id="questions" class="tab">
-            <p id="question"></p>
-        </div>
-        <div id="choices"></div>
-    </div>
-    <div id="pause-screen">
-        <div id="pause-heading">
-            <p>Paused</p>
-        </div>
-        
-        <div id="resume" class="btn">
-            <p>Resume</p>
-        </div>
-    </div>
-    <div id="end-screen">
-        <div id="end-heading">
-            <p>Results:</p>
-        </div>
-        <div id="end-body">
-            <p>Correct Answers: <span id="correct-text">0</span></p>
-            <p>Incorrect Answers: <span id="incorrect-text">0</span></p>
-            <p>Unanswered: <span id="unanswered">0</span></p>
-        </div>
-        
-        <div id="end-bottom">
-            <div id="play-again" class="btn">
-                <p>Play Again?</p>
-            </div>
-        </div>
+
+        <p id="remaining">Time Remaining: # Seconds</p>
+        <p id="question"></p>
+        <p class="answer" id="a1" data-index="0"></p>
+        <p class="answer" id="a2" data-index="1"></p>
+        <p class="answer" id="a3" data-index="2"></p>
+        <p class="answer" id="a4" data-index="3"></p>
+
+        <p id="correct-text">The correct answer is: Oswald the Lucky Rabbit</p>
+        <img class="img-fluid" id="gif" src="" alt="Answer Gif" />
+        <p id="stats"></p>
+        <button id="start">START</button>
     </div>
 
     <audio controls autoplay>
@@ -63,7 +34,6 @@
     </audio>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-    <script type="text/javascript" src="assets/javascript/trivia.js"></script> 
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 </html>
