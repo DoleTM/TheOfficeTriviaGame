@@ -73,7 +73,7 @@ var trivia = [{
 {
     question: "In S2E3 'Office Olympics': What does Pam name 'Box of paper snowshoe racing'?",
     answers: [
-        { a1: "Flonkerton", value: true, pic: "placeholder.gif" },
+        { a1: "Flonkerton", value: true, pic: "flonkerton.gif" },
         { a2: "Icelandic Snowshoe Racing", value: false },
         { a3: "Bixing", value: false },
         { a4: "Pegerhosen", value: false }
@@ -200,7 +200,7 @@ var displayStats = function () {
     $("#gif").hide();
     $("#stats").html("Correct answers: " + correct + "<br>Incorrect answers: " + incorrect + "<br>Unanswered: " + unanswered);
     $("#stats").show();
-    $("#start").text("TRY AGAIN");
+    $("#start").text("Try Again?");
     $("#start").show();
 }
 

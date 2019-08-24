@@ -2,34 +2,33 @@
 html,body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 body {
     font-family: 'Tahoma', sans-serif;
     text-align: center;
     letter-spacing: 2px;
-    background-image: url(../images/dundermifflin.jpg);
+    background-image: url("https://images7.alphacoders.com/420/420126.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-color: rgb(0, 0, 0);
-    color: white;
-}
-
-header {
-    display: none;
-    height: 10%;
-    width: 100%;
-    background-color: #3d9dcb;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    box-shadow: 2px 0 3px 2px rgb(59, 136, 136);
+    color: black;
 }
 
 h1 {
-    color: white;
+    color: black;
     font-size: 44px;
     line-height: 10vh;
+    text-align: center;
+}
+
+.container {
+    border: 5px solid black;
+    text-align: left;
+    padding: 10px;
+    display: grid;
+    background-color: white;
+    opacity: 0.6;
 }
 
 #remaining {
@@ -39,7 +38,7 @@ h1 {
 
 #question {
     font-size: 25px;
-    color: #ffffff;
+    color: black;
     display: none;
 }
 
@@ -48,10 +47,11 @@ h1 {
     width: 300px;
     height: 38px;
     margin: 5px auto;
+    float: left;
 }
 
 .answer:hover {
-    color: black;
+    color: green;
     cursor: pointer;
 }
 
@@ -77,11 +77,11 @@ h1 {
 #start {
     font-size: 40px;
     width: 140px;
-    margin: 50px auto;
+    margin: auto;
 }
 
 #start:hover {
-    background: #2c6957;
+    background: green;
     cursor: pointer;
 }
 
