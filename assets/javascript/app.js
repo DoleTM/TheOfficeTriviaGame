@@ -221,3 +221,9 @@ $(".answer").on("click", function () {
         displayResult(-1);
     };
 });
+
+var audio = document.getElementById("myAudio");
+
+function playAudio() {
+    audio.play();
+};

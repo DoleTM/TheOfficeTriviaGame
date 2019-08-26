@@ -26,10 +26,10 @@
         <p id="correct-text">The correct answer is: Oswald the Lucky Rabbit</p>
         <img class="img-fluid" id="gif" src="" alt="Answer Gif" />
         <p id="stats"></p>
-        <button type="button" id="start" class="btn btn-primary">Start</button>
+        <button type="button" id="start" class="btn btn-primary" onclick="playAudio()">Start</button>
     </div>
 
-    <audio controls autoplay>
+    <audio controls autoplay id="myAudio">
         <source src="assets/images/dundermifflinaudio.mp3" type="audio/mp3">
     </audio>
 
